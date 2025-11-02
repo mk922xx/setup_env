@@ -66,3 +66,37 @@ done
 # 成功した場合
 echo "[$TIMESTAMP] user=$USER_NAME host=$HOST_NAME action=init_dirs status=SUCCESS" >> "$LOG_FILE"
 echo "✅ relation_hub ディレクトリ構造の初期化完了: $BASE_DIR"
+
+# ────────────────────────────────
+# (6) 80_rules : rule base for all AI tools
+# ────────────────────────────────
+RULES_DIR="$HOME/relation_hub/80_rules"
+mkdir -p "$RULES_DIR"
+
+cat << 'EOF' > "$RULES_DIR/README.md"
+# 80_rules : Rule Base for relation_hub
+
+## 🧭 Purpose
+relation_hub全体の知的活動を支える「原則・思想・ルール」を一元管理します。
+Cursor / Claude / Codex / ChatGPT など全AIツールがここを参照します。
+
+## 📁 Structure
+- global.mdc  : relation_hub 全体の理念・方針
+- dev.mdc     : 開発・生成AI用ルール
+- prompt.mdc  : 対話・プロンプト設計ルール
+- ethics.mdc  : 倫理・判断基準
+- index-rule.mdc : ルール索引（どのファイルに何があるか）
+
+## 🧠 Policy
+1. ルールはここに集約（唯一の中枢）
+2. すべて .mdc 形式（Markdown Compatible）
+3. Git で履歴管理（変更理由はコミットメッセージへ）
+4. ルールは「Why/What」（原則）を主に、具体手順は他フォルダへ
+
+## 🔗 How to Reference
+ツール側では、このフォルダ（80_rules）をそのまま参照します。
+必要なら各ツール側にシンボリックリンクを作成してもOK。
+EOF
+
+touch "$RULES_DIR"/{global.mdc,dev.mdc,prompt.mdc,ethics.mdc,index-rule.mdc}
+echo "✅ 80_rules directory initialized at: $RULES_DIR"
